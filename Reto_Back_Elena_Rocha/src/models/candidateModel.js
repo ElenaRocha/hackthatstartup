@@ -34,7 +34,7 @@ const CandidateSchema = new Schema({
         twitter: String,
         youtube: String,
     }
-}, {timestamps: true});
+});
 
 CandidateSchema.plugin(uniqueValidator, {message: 'El usuario ya existe'});
 
