@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const candidateController = require("../controllers/candidatesController");
 
 //para mayor seguridad, una opción es guardar el secret en variables de entorno
-var secret = process.env.SECRET;
+let secret = process.env.SECRET;
 secret = 123
 
 const router = express.Router();

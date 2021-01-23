@@ -4,7 +4,7 @@
   "description": "backend de aplicación web para una empresa de contratación laboral, perfil de candidato",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive --exit"
   },
   "author": "ElenaRocha",
   "license": "ISC",
@@ -18,6 +18,10 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "mockgoose": "^8.0.4",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.1"
   }
 }

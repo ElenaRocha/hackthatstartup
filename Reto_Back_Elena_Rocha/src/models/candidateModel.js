@@ -35,6 +35,4 @@ const CandidateSchema = new Schema({
     }
 });
 
-CandidateSchema.plugin(uniqueValidator, {message: 'El usuario ya existe'});
-
 module.exports = mongoose.model("Candidate", CandidateSchema);

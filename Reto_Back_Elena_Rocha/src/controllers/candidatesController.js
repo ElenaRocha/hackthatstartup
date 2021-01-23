@@ -10,17 +10,36 @@ mongoose.set("useFindAndModify", false);
 var secret = process.env.SECRET;
 secret = 123
 
-mongoose
-    .connect("mongodb://localhost:27017/perseo", 
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .catch((error) => console.log(error));
+if (process.env.NODE_ENV === "test") {
+    const Mockgoose = require("mockgoose").Mockgoose;
+    const mockgoose = new Mockgoose(mongoose);
 
-mongoose.connection.on("error", (err) => {
-  console.log("Database error: ", err);
-});
+    mockgoose.prepareStorage()
+        .then(() => {
+            mongoose.connect("mongodb://localhost:27017/perseo",
+            {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            })
+            .catch((error) => console.log(error));
+    
+        mongoose.connection.on("error", (err) => {
+        console.log("Database error: ", err);
+        });
+        })
+} else {
+    mongoose
+        .connect("mongodb://localhost:27017/perseo",
+        {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        })
+        .catch((error) => console.log(error));
+
+    mongoose.connection.on("error", (err) => {
+    console.log("Database error: ", err);
+    });
+}
 
 const candidateController = {
     createCandidate: async function (req, res) {
