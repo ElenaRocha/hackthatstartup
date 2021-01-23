@@ -6,8 +6,12 @@ const Candidate = require("../models/candidateModel.js");
 
 mongoose.set("useFindAndModify", false);
 
+//para mayor seguridad, una opción es guardar el secret en variables de entorno
+var secret = process.env.SECRET;
+secret = 123
+
 mongoose
-    .connect("mongodb://localhost:27017/pruebas", 
+    .connect("mongodb://localhost:27017/perseo", 
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,

@@ -20,7 +20,6 @@ const CandidateSchema = new Schema({
     password: {
         type: String,
         required: [true, "Este campo es obligatorio"],
-        match: [/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, "Contraseña débil"]
     },
     bio: {type: String},
     academics: [{dateBegin: Date, dateFinish: Date, currently: Boolean, title: String, institution: String, description: String}],

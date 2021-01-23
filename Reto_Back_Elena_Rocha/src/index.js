@@ -5,7 +5,6 @@ const morgan = require("morgan");
 const candidatesRouter = require("./routes/candidatesRouter");
 
 const app = express();
-const appPort = 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -29,6 +28,21 @@ app.use((err, req, res, next) => {
   
   app.get("/", (req, res) => res.send("Welcome"));
   
-  app.listen(appPort, () => {
-    console.log("Running on port ", appPort)
+  app.use((err, req, res, next) => {
+    if (res.headersSent) {
+      return next(err);
+    }
+    res.status(500);
+    res.render("error", { error: err });
   });
+  
+  app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send("Something broke!");
+  });
+  
+  app.get("/", (req, res) => res.send("Welcome"));
+  
+  app.listen(process.env.PORT || 3000, () =>
+    console.log("Running on port ", process.env.PORT || 3000)
+  );
